@@ -17,25 +17,31 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        if (head == nullptr) return nullptr;
-        
-        unordered_map<Node*, Node*> m;
-        
-        // Pass 1: Clone all nodes and store them in the map
-        Node* curr = head;
-        while (curr != nullptr) {
-            m[curr] = new Node(curr->val);
-            curr = curr->next;
+        if(head==nullptr) return nullptr;
+        unordered_map<Node*,Node*>m;
+        Node* newhead=new Node(head->val);
+
+        Node* oldtemp=head->next;
+        Node* newtemp=newhead;
+
+        m[head]=newhead;
+
+        while(oldtemp!=nullptr){
+            Node* newnode=new Node(oldtemp->val);
+
+            m[oldtemp]=newnode;
+            newtemp->next=newnode;
+
+            newtemp=newtemp->next;
+            oldtemp=oldtemp->next;
         }
-        
-        // Pass 2: Connect the next and random pointers for the clones
-        curr = head;
-        while (curr != nullptr) {
-            m[curr]->next = m[curr->next];
-            m[curr]->random = m[curr->random];
-            curr = curr->next;
+        oldtemp=head;newtemp=newhead;
+        while(oldtemp!=nullptr){
+            newtemp->random=m[oldtemp->random];
+
+            newtemp=newtemp->next;
+            oldtemp=oldtemp->next;
         }
-        
-        return m[head];
+        return newhead;
     }
 };
