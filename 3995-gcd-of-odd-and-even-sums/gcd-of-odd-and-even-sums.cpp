@@ -12,16 +12,7 @@ public:
         return ans;
     }
     int gcdOfOddEvenSums(int n) {
-        int sumEven=0,sumOdd=0;
-        int Ce=0,Co=0;
-        for(int i=2;Ce<n;i=i+2) {
-            sumEven+=i;
-            Ce++;
-        }
-        for(int i=1;Co<n;i=i+2) {
-            sumOdd+=i;
-            Co++;
-        }
+        int sumEven=n*n,sumOdd=n*(n+1);
         return gcd(sumEven,sumOdd);
     }
 };
