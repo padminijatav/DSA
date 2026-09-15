@@ -6,10 +6,7 @@ public:
 
         while(j<n && word[j]!=ch) j++;
         if(j==n) return word;
-        while(i<j){
-            swap(word[i],word[j]);
-            i++,j--;
-        }
+        reverse(word.begin(),word.begin()+j+1);
         return word;
     }
 };
